@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+
+{% language LANGUAGE_CODE %}
+
+{% block title %} {% trans 'All Categories' %} {% endblock title %}
+{% block description %}{% trans 'Category Archives of All Articles' %}{% endblock description %}
+
+{% block header %}
+    <div class="container header-wrapper">
+        <div class="row">
+              <div class="col-lg-12">
+                  <div class="header-content">
+                      <h1 class="header-title text-uppercase"> {% trans 'All Categories' %}</h1>
+                      <div class="header-underline"></div>
+                      <p class="header-subtitle header-subtitle-homepage">{% trans 'Category Archives of All Articles' %}</p>
+                  </div>
+              </div>
+        </div>
+    </div>
+{% endblock header %}
+
+{% block content %}
+    <div class="archive-container">
+        <div class="container content archive">
+        	{% for category in categories %}
+            {% if not category.posts.all.count == 0 %}
+                <h2><a href="{% url 'view_category' category.slug %}">{{ category.name|title }}</a></h2>
+                <dl class="dl-horizontal">
+            	{% for post in category.posts.all|slice:':10' %}
+            	    <dt>{{ post.created_on.date }}</dt>
+                    {% url 'post_detail' post.created_on.date.year post.created_on.date.month post.slug as post_url %}
+                    {% if post_url %}<dd><a href="{{ post_url }}">{{ post.title }}</a></dd>{% endif %}
+            	{% endfor %}
+                <dd><small><a href="{% url 'view_category' category.slug %}">{% trans 'And more...' %}</a></small></dd>
+                </dl>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock content %}
+{% endlanguage %}

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% get_current_language as LANGUAGE_CODE %}
+{% language LANGUAGE_CODE %} 
+{% block title %}{% blocktrans with name=author.name %}About @{{ name }}{% endblocktrans %}{% endblock title %}
+{% block description %}{% blocktrans %} About this author {% endblocktrans %}{% endblock description %}
+{% endlanguage %}
+
+
+{% block header %}
+    <div class="container header-wrapper">
+        <div class="row">
+              <div class="col-lg-12">
+                  <div class="header-content">
+                    {% language LANGUAGE_CODE %} 
+                    {% blocktrans with name=author.name %}
+                      <h1 class="header-title text-uppercase">About: @{{ name }}</h1>
+                      <div class="header-underline"></div>
+                      <p class="header-subtitle header-subtitle-homepage">Some facts about this author</p>
+                    {% endblocktrans %}
+                    {% endlanguage %}
+                  </div>
+              </div>
+        </div>
+    </div>
+{% endblock header %}
+
+{% block content %}
+
+    <div class="archive-container">
+        <div class="container content archive">
+                {% language LANGUAGE_CODE %}
+                    {{author.description|safe}}
+                {% endlanguage LANGUAGE_CODE %}
+        </div>
+    </div>
+{% endblock content %}

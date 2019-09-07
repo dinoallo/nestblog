@@ -1,0 +1,12 @@
+{% if paginator.num_pages > 1 %}
+<!-- /Navigation -->
+<div class="container navigation">
+	{% if page_obj.has_previous %}
+    	<a class="navigate pull-left" href="?page={{ page_obj.previous_page_number }}"><i class="fa fa-caret-left"></i> {{ page_obj.previous_page_number }}</a>
+    {% endif %}
+    {% if page_obj.has_next %}
+    	<a class="navigate pull-right" href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }} <i class="fa fa-caret-right"></i></a>
+    {% endif %}
+</div>              
+<!-- /Navigation --> 
+{% endif %}

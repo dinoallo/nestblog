@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+
+{% language LANGUAGE_CODE %}
+
+{% block title %} {{ category.name|title }}{% endblock title %}
+{% block description %}{{ category.description }}{% endblock description %}
+
+{% block header %}
+    <div class="container header-wrapper">
+        <div class="row">
+              <div class="col-lg-12">
+                  <div class="header-content">
+                      <h1 class="header-title text-uppercase">{% blocktrans with name=category.name|title%}Category : {{ name }}{% endblocktrans %}</h1>
+                      <div class="header-underline"></div>
+                      <p class="header-subtitle header-subtitle-homepage">{{ category.description }}</p>
+                  </div>
+              </div>
+        </div>
+    </div>
+{% endblock header %}
+
+{% block content %}
+    {% if posts_filtered_by_categories %}
+        <div class="archive-container">
+            <div class="container content archive">
+                <h2>{% trans 'All posts' %}{% if page_obj.has_previous %}<small>- {% trans 'page' %} {{ page_obj.number }}</small>{% endif %}</h2>
+                <dl class="dl-horizontal">
+                    {% for post in posts_filtered_by_categories %}
+                        <dt>{{ post.created_on.date }}</dt>
+                        {% url 'post_detail' post.created_on.date.year post.created_on.date.month post.slug as post_url %}
+                        {% if post_url %}<dd><a href="{{ post_url }}">{{ post.title }}</a></dd>{% endif %}
+                    {% endfor %}
+                </dl>
+            </div>
+        </div>
+        {% include 'pagination.html' %}
+    {% else %}
+        <div class="archive-container">
+        <div class="container content archive">
+            <h2><a href="#">{{category.name|title}}</a></h2>
+        </div>
+    </div>
+    {% endif %}
+{% endblock content %}
+{% endlanguage %}
