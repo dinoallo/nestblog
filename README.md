@@ -4,9 +4,9 @@ Nest is originally a theme for [Pelican](http://getpelican.com) 3.5+, a static s
 Github user [Moliver](https://github.com/molivier) created this theme for his blog, and you can find his source code [here](https://github.com/molivier/nest).  
 I re-wrote some parts of the code for those who wants to develop their own blog using django but doesn't like to build it from scratch.  
 
-## Screenshots  
+## Preview  
 
-You can find some screenshots [here](https://github.com/molivier/nest#screenshots).  
+You can find some screenshots [here](https://github.com/molivier/nest#screenshots) or browse it yourself at www.allosaurus.info/nestblog !  
 
 ## Prerequisite(s)  
 * Python with [pygments](http://pygments.org/) and [modeltranslation](https://django-modeltranslation.readthedocs.io/en/latest/installation.html) installed.
